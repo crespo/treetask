@@ -4,5 +4,5 @@ class Usuario:
         self.nome = nome
         self.relacionamentos = []
 
-        def __repr__(self):
-            return f"Usuario({self.usuario_id}, {self.nome})"
+    def __repr__(self):
+        return f"Usuario({self.usuario_id}, {self.nome})"
