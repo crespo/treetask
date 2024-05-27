@@ -1,39 +1,35 @@
-from SocialNetworkTree import SocialNetworkTree
+from Relacionamento import Relacionamento
 
 
 def main():
-    # Inserindo usuários
-    network = SocialNetworkTree()
+
+    redeSocial = Relacionamento()
     print("Inserindo 3 usuários...")
-    network.add_user(1, "Alice")
-    network.add_user(2, "Bob")
-    network.add_user(3, "Charlie")
+    redeSocial.adicionar_usuario(1, "Alice")
+    redeSocial.adicionar_usuario(2, "Lucas")
+    redeSocial.adicionar_usuario(3, "Alex")
 
-    # Estabelecendo relacionamentos
     print("Estabelecendo relacionamentos...")
-    network.add_relationship(1, 2)
-    network.add_relationship(1, 3)
+    redeSocial.adicionar_relacionamento(1, 2)
+    redeSocial.adicionar_relacionamento(1, 3)
 
-    # Visualizando a árvore
-    network.display_tree()
+    redeSocial.mostrar_arvore()
 
-    # Removendo um usuário
-    # print("Removendo usuário 2...")
-    # network.remove_user(2)
+    # redeSocial.remover_usuario(2)
 
-    # Visualizando a árvore após remoção
-    network.display_tree()
+    redeSocial.mostrar_arvore()
 
-    # Buscando um usuário
-    user = network.find_user(1)
-    if user:
-        print(f"User found: {user.name} ({
-              user.user_id}) -> {[friend.name for friend in user.relationships]}")
+    usuario = redeSocial.encontrar_usuario(1)
 
-    communities = network.find_communities()
+    if usuario:
+        print(f"Usuário encontrado: {usuario.nome} ({
+            usuario.usuario_id}) -> {[amigo.nome for amigo in usuario.relacionamentos]}")
 
-    for idx, community in enumerate(communities):
-        print(f"Community {idx + 1}: {[user.name for user in community]}")
+    comunidades = redeSocial.encontrar_comunidades()
+
+    for i, comunidade in enumerate(comunidades):
+        print(f"Comunidade {
+              i + 1}: {[usuario.nome for usuario in comunidade]}")
 
 
 if __name__ == "__main__":
