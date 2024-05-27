@@ -41,6 +41,7 @@ class Relacionamento:
             print(f"Usuario {usuario_id} não encontrado.")
             return None
 
+    # Encontrar comunidades baseadas em relacionamentos
     def encontrar_comunidades(self):
         visitado = set()
         comunidades = []
