@@ -1,3 +1,8 @@
+### Alunos
+- Rafael Alves
+- Raul Crespo
+- Thiago José Camêlo
+- 
 ### Material para estudar
 - [DFS (Depth-first Search)](https://en.wikipedia.org/wiki/Depth-first_search)
 - [List Comprehension](https://www.w3schools.com/python/python_lists_comprehension.asp)
