@@ -6,19 +6,28 @@ class Relacionamento:
         self.usuarios = {}
 
     def adicionar_usuario(self, usuario_id, nome):
-        if usuario_id not in self.usuarios:
-            self.usuarios[usuario_id] = Usuario(usuario_id, nome)
-            print(f"Usuário {usuario_id} adicionado com Sucesso!")
-        else:
+        if usuario_id in self.usuarios:
             print(f"Usuario {usuario_id} já existe.")
+        elif self.naoEhInteiro(usuario_id):
+            print("ID do usuário deve ser um valor do tipo inteiro")
+        elif int(usuario_id) < 0:
+            print("ID do usuário deve ser maior que zero")
+        else:
+            self.usuarios[usuario_id] = Usuario(usuario_id, nome)
+            print(f"Usuário {usuario_id} adicionado com sucesso!")
 
     def adicionar_relacionamento(self, usuario_id1, usuario_id2):
-        if usuario_id1 in self.usuarios and usuario_id2 in self.usuarios:
+        if not (usuario_id1 in self.usuarios) or not (usuario_id2 in self.usuarios):
+            print(f"Um ou ambos usuários não achados: {usuario_id1}, {usuario_id2}")  # nopep8
+        elif self.existeRelacionamentoEntre(usuario_id1, usuario_id2):
+            print(f"Relacionamento entre {usuario_id1} e {usuario_id2} já existe")  # nopep8
+        elif usuario_id1 == usuario_id2:
+            print(f"Relacionamentos devem ser entre usuários diferentes")
+        else:
+            print(self.usuarios[usuario_id1].relacionamentos)
             self.usuarios[usuario_id1].relacionamentos.append(self.usuarios[usuario_id2])  # nopep8
             self.usuarios[usuario_id2].relacionamentos.append(self.usuarios[usuario_id1])  # nopep8
-            print(f"Relacionamento entre {usuario_id1} e {usuario_id2} adicionado com Sucesso!")  # nopep8
-        else:
-            print(f"Um ou ambos usuários não achados: {usuario_id1}, {usuario_id2}")  # nopep8
+            print(f"Relacionamento entre {usuario_id1} e {usuario_id2} adicionado com sucesso!")  # nopep8
 
     def remover_usuario(self, usuario_id):
         if usuario_id in self.usuarios:
@@ -59,3 +68,18 @@ class Relacionamento:
                 comunidades.append(comunidade)
 
         return comunidades
+
+    def existeRelacionamentoEntre(self, usuario_id1, usuario_id2):
+        for usuario in self.usuarios[usuario_id1].relacionamentos:
+            if usuario.usuario_id == usuario_id2:
+                return True
+
+        return False
+
+    def naoEhInteiro(self, s):
+        try:
+            int(s)
+        except ValueError:
+            return True
+        else:
+            return False
